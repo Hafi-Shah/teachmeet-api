@@ -1,0 +1,6 @@
+@teachmeet_api_HostAddress = http://localhost:5187
+
+GET {{teachmeet_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

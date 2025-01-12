@@ -1,0 +1,1 @@
+﻿dotnet ef dbcontext scaffold "Server=localhost\SQLEXPRESS;Database=teachmeetdb;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -o Entities --project teachmeet-api --force --no-onconfiguring
