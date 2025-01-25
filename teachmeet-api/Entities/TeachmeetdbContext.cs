@@ -156,8 +156,7 @@ public partial class TeachmeetdbContext : DbContext
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasNoKey();
-
+            entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedBy)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -174,9 +173,6 @@ public partial class TeachmeetdbContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("First_Name");
             entity.Property(e => e.GenderId).HasColumnName("Gender_ID");
-            entity.Property(e => e.Id)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("ID");
             entity.Property(e => e.LastName)
                 .HasMaxLength(50)
                 .IsUnicode(false)
