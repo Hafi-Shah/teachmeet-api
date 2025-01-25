@@ -71,7 +71,7 @@ namespace teachmeet_api.Controllers
 
             if (studentDetail == null)
             {
-                return NotFound(new { Message = "Student not found" });
+                return NotFound(new { Message = "Student not founds" });
             }
 
             return Ok(studentDetail);
