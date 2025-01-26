@@ -76,10 +76,28 @@ namespace teachmeet_api.Controllers
 
             return Ok(studentDetail);
         }
-        [HttpPost("ChangeStudentStatus")]
-        public async Task<IActionResult> ChangeFacultyStatus([FromBody] ChangeStudentStatusReqDTO request)
+        [HttpGet("GetStudentCards")]
+        public async Task<IActionResult> GetStudentCards()
         {
-            var student = await db.Faculties.FirstOrDefaultAsync(f => f.Id == request.StudentId);
+            var studentCards = await (from s in db.Students
+                                      join d in db.Departments on s.DepartmentId equals d.Id
+                                      where s.LiveData == true
+                                      select new
+                                      {
+                                          s.Id,
+                                          Name = s.FirstName + " " + s.LastName,
+                                          s.Status,
+                                          Department = d.Name,
+                                          s.ProfileImage
+                                      }).ToListAsync();
+
+            return Ok(studentCards);
+        }
+
+        [HttpPost("ChangeStudentStatus")]
+        public async Task<IActionResult> ChangeStudentStatus([FromBody] ChangeStudentStatusReqDTO request)
+        {
+            var student = await db.Students.FirstOrDefaultAsync(s => s.Id == request.StudentId);
 
             if (student == null)
             {

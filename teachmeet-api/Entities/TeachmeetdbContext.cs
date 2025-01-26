@@ -19,6 +19,10 @@ public partial class TeachmeetdbContext : DbContext
 
     public virtual DbSet<Gender> Genders { get; set; }
 
+    public virtual DbSet<NotificationFacToFa> NotificationFacToFas { get; set; }
+
+    public virtual DbSet<NotificationStuToFa> NotificationStuToFas { get; set; }
+
     public virtual DbSet<OfficeTiming> OfficeTimings { get; set; }
 
     public virtual DbSet<Student> Students { get; set; }
@@ -140,6 +144,60 @@ public partial class TeachmeetdbContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(10)
                 .IsUnicode(false);
+        });
+
+        modelBuilder.Entity<NotificationFacToFa>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__NOTIFICA__3214EC273ACF9B36");
+
+            entity.ToTable("NOTIFICATION_FAC_TO_FA");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CreatedDate)
+                .HasPrecision(0)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("CREATED_DATE");
+            entity.Property(e => e.Description)
+                .HasMaxLength(255)
+                .HasColumnName("DESCRIPTION");
+            entity.Property(e => e.FromFacultyId).HasColumnName("FROM_FACULTY_ID");
+            entity.Property(e => e.IsActive).HasColumnName("IS_ACTIVE");
+            entity.Property(e => e.IsRead).HasColumnName("IS_READ");
+            entity.Property(e => e.OfficeTime)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("OFFICE_TIME");
+            entity.Property(e => e.Title)
+                .HasMaxLength(255)
+                .HasColumnName("TITLE");
+            entity.Property(e => e.ToFacultyId).HasColumnName("TO_FACULTY_ID");
+        });
+
+        modelBuilder.Entity<NotificationStuToFa>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__NOTIFICA__3214EC278362F04B");
+
+            entity.ToTable("NOTIFICATION_STU_TO_FA");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.CreatedDate)
+                .HasPrecision(0)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnName("CREATED_DATE");
+            entity.Property(e => e.Description)
+                .HasMaxLength(255)
+                .HasColumnName("DESCRIPTION");
+            entity.Property(e => e.FacOfficeTime)
+                .HasMaxLength(100)
+                .IsUnicode(false)
+                .HasColumnName("FAC_OFFICE_TIME");
+            entity.Property(e => e.FromStudentId).HasColumnName("FROM_STUDENT_ID");
+            entity.Property(e => e.IsActive).HasColumnName("IS_ACTIVE");
+            entity.Property(e => e.IsRead).HasColumnName("IS_READ");
+            entity.Property(e => e.Title)
+                .HasMaxLength(255)
+                .HasColumnName("TITLE");
+            entity.Property(e => e.ToFacultyId).HasColumnName("TO_FACULTY_ID");
         });
 
         modelBuilder.Entity<OfficeTiming>(entity =>
